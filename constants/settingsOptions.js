@@ -1,7 +1,6 @@
 export const timeOptions = [
-  { label: "5 sec", value: 5000 },
-  { label: "10 sec", value: 10000 }, 
-  { label: "15 sec", value: 15000 }
+  { label: "10 sec", value: 10 }, 
+  { label: "5 sec", value: 5 }
 ];
 
 export const typeOptions = [

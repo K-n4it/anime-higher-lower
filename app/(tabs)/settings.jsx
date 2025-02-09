@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 import SettingItem from '../../components/SettingItem';
 import { 
@@ -9,7 +9,7 @@ import {
   guessOptions 
 } from "../../constants/settingsOptions";
 
-export let time = 5000;
+export let time = 15;
 export let type = "";
 
 export default function Settings() {
@@ -17,18 +17,18 @@ export default function Settings() {
   // const { time, type, guess } = useGlobalContext();
 
   return (
-    <SafeAreaView>
-      <View className="items-center justify-center">
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
         <View>
-          <Text className="font-psemibold">Settings</Text>
+          <Text style={styles.title}>Settings</Text>
         </View>
 
-        <View>
+        <View style={styles.settingsCont}>
         <SettingItem 
           title="Time limit (clock mode)" 
           onValueChange={value => time = value} 
           items={timeOptions} 
-          placeholder={{ label: "No limit", value: false }} 
+          placeholder={{ label: "15 sec", value: 15 }} 
         />
 
         <SettingItem 
@@ -49,3 +49,30 @@ export default function Settings() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  safeArea: { 
+    height: "100%",
+    backgroundColor: "#0F0F0F"
+   },
+   container: {
+    flex: 1,
+    width: "100%",
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+  title: {
+    backgroundColor: "#3A3A3A",
+    color: "#FFFFFF",
+    paddingVertical: 12,
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  settingsCont: {
+    flex: 1,
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginHorizontal: 12
+  }
+});

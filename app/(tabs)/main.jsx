@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, StyleSheet } from "react-native";
 import { router } from "expo-router";
@@ -9,6 +9,8 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { getAnimeItem } from "../../service/jikan";
 
 import icons from "../../constants/icons";
+
+export let isTimeOut;
 
 export default function Main() {
   return (
@@ -33,7 +35,10 @@ export default function Main() {
               <ButtonComponent 
                 title="Normal mode" 
                 icon={icons.game} 
-                onPress={() => router.push("game")} 
+                onPress={() => {
+                  router.push("game");
+                  isTimeOut = false;
+                }} 
                 size={60} 
                 color="#00C6CF"
               />
@@ -41,7 +46,10 @@ export default function Main() {
               <ButtonComponent 
                 title="Beat the clock mode" 
                 icon={icons.clock} 
-                onPress={() => router.push("game")} 
+                onPress={() => {
+                  router.push("game");
+                  isTimeOut = true;
+                }} 
                 size={60} 
                 color="#00C6CF"
               />

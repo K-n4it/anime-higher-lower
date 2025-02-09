@@ -6,11 +6,14 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 
 import GameItem from "../../components/GameItem";
 import { getAnimeItem, validateItem } from "../../service/jikan";
+import { isTimeOut } from "../(tabs)/main";
+import { time } from "../(tabs)/settings";
 
 export default function Game() {
 
     const [animeItems, setAnimeItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [timer, setTimer] = useState(time);
 
     const { score, setScore } = useGlobalContext();
 
@@ -36,17 +39,6 @@ export default function Game() {
     const compareNums = async playerAnswer => {
       // switch case here
       const isHigher = animeItems[1].score > animeItems[0].score;
-
-      // let isHigher;
-
-      // switch (guess) {
-      //   case "popularity":
-      //     const isHigher = await animeItems[1].popularity > animeItems[0].popularity;
-      //     break;
-      
-      //   default:
-      //     break;
-      // }
 
       if (playerAnswer !== isHigher) {
         router.replace("gameover");
@@ -87,22 +79,19 @@ export default function Game() {
         setIsLoading(false);
       };
 
-      // const defineGuess = () => {
-      //   let answer;
-
-      //   switch (guess) {
-      //     case "popularity":
-      //       answer = item.popularity;
-      //       break;
-        
-      //     default:
-      //       break;
-      //   }
-      // };
-
       addItemsStart();
       // console.log("tipo: ", type, "adivinar: ", guess);
     }, []);
+
+    useEffect(() => {
+
+      let interval = null;
+        
+      if (!isLoading && timer !== 0) interval = setInterval(() => setTimer(timer - 1), 1000);
+
+      return () => clearInterval(interval);
+
+    }, [timer, isLoading]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -154,7 +143,7 @@ export default function Game() {
           }, 
           styles.indicatorText
           ]}>
-          VS
+            {isTimeOut && !isLoading ? timer : "VS"}
           </Text>
         </View>
       </View>
