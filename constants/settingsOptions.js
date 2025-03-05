@@ -1,6 +1,6 @@
 export const timeOptions = [
-  { label: "10 sec", value: 10 }, 
-  { label: "5 sec", value: 5 }
+  { label: "15 sec", value: 15 }, 
+  { label: "10 sec", value: 10 }
 ];
 
 export const typeOptions = [
@@ -8,8 +8,3 @@ export const typeOptions = [
   { label: "Movies", value: "type=movie" }, 
   { label: "Ovas", value: "type=ova" }
 ];
-
-// export const guessOptions = [
-//   { label: "Popularity", value: "popularity" }, 
-//   { label: "Favorites", value: "favorites" }
-// ];

@@ -5,12 +5,14 @@ export default function SettingItem({ icon, title, items, onValueChange, placeho
 
   return (
     <View style={styles.container}>
-      <Image 
-        style={styles.icon} 
-        source={icon} 
-      />
+      <View style={styles.infoContainer}>
+        <Image 
+          style={styles.icon} 
+          source={icon} 
+        />
 
-      <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
+      </View>
 
       <RNPickerSelect 
         style={styles.picker} 
@@ -29,16 +31,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderRadius: 30
   },
+  infoContainer: {
+    marginTop: 10,
+    width: "100%",
+    flexGrow: 0,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center"
+  },
   icon: {
     width: 40,
     height: 40
   },
   title: {
+    width: "75%",
     color: "#FFFFFF",
     fontSize: 20,
-    // fontWeight: "bold",
+    fontFamily: "VarelaRound"
   },
-  picker: {
-    backgroundColor: "#3A3A3A"
-  }
+  picker: {}
 });

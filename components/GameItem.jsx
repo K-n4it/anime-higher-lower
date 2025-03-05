@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
-import { View, Text, Alert, ImageBackground, StyleSheet } from "react-native";
+import { View, Text, ImageBackground, StyleSheet } from "react-native";
 
 import ButtonComponent from "./ButtonComponent";
 
-import img from "../assets/images/eru_smug.png";
-import arrowUp from "../assets/icons/up.png";
-import arrowDown from "../assets/icons/down.png";
+import icons from "../constants/icons";
 
 export default function GameItem({ key, title, vsTitle, answer, background, showAnswerState, handleTab }) {
 
   const [showAnswer, setShowAnswer] = useState(showAnswerState);
   const [titleLength, setTitleLength] = useState(0);
-
-  const handleShowAnswer = () => setShowAnswer(true);
 
   useEffect(() => {
     const checkTitleLength = () => setTitleLength(title.length);
@@ -37,27 +33,27 @@ export default function GameItem({ key, title, vsTitle, answer, background, show
         ]}>
           {title.length > 35 ? `${title.substring(0, 35)}...` : title}
         </Text>
-        <Text style={styles.subText}>has</Text>
+        <Text style={styles.subText}>has a</Text>
 
         {showAnswer ? (
           <View style={styles.containerInfo}>
-            <Text style={styles.number}>{answer}</Text> 
-            <Text style={styles.subText}>Votes currently</Text>
+            <Text style={styles.number}>{answer}</Text>
+            <Text style={styles.subText}>score currently</Text>
           </View>
         ) : (
           <View style={styles.containerInfo}>
             <ButtonComponent 
               title="Higher" 
-              onPress={() => handleTab(true, handleShowAnswer)} 
-              icon={arrowUp} 
+              onPress={() => handleTab(true, setShowAnswer)} 
+              icon={icons.up} 
               size={45} 
               color="#FFFFFF"
             />
 
             <ButtonComponent 
               title="Lower" 
-              onPress={() => handleTab(false, handleShowAnswer)} 
-              icon={arrowDown} 
+              onPress={() => handleTab(false, setShowAnswer)} 
+              icon={icons.down} 
               size={45} 
               color="#FFFFFF"
             />
@@ -90,9 +86,9 @@ const styles = StyleSheet.create({
   title: {
     color: "#FFFFFF",
     fontWeight: "bold",
-    // fontSize: 25,
     textAlign: "center",
-    paddingBottom: 2
+    paddingBottom: 2,
+    fontFamily: "Varela"
   },
   containerInfo: {
     paddingHorizontal: 4,
@@ -101,11 +97,12 @@ const styles = StyleSheet.create({
   subText: {
     color: "#FFFFFF",
     marginTop: 2,
-    fontSize: 15
+    fontSize: 15,
+    fontFamily: "VarelaRound"
   },
   number: {
     fontSize: 25,
     fontWeight: "bold",
     color: "#00C6CF"
   },
-})
+});

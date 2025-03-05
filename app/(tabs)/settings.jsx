@@ -3,18 +3,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, StyleSheet } from "react-native";
 
 import SettingItem from '../../components/SettingItem';
-import { 
-  timeOptions, 
-  typeOptions, 
-  guessOptions 
-} from "../../constants/settingsOptions";
+import { timeOptions, typeOptions } from "../../constants/settingsOptions";
+import icons from '../../constants/icons';
 
-export let time = 15;
+export let time = 20;
 export let type = "";
 
 export default function Settings() {
-
-  // const { time, type, guess } = useGlobalContext();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -24,26 +19,21 @@ export default function Settings() {
         </View>
 
         <View style={styles.settingsCont}>
-        <SettingItem 
-          title="Time limit (clock mode)" 
-          onValueChange={value => time = value} 
-          items={timeOptions} 
-          placeholder={{ label: "15 sec", value: 15 }} 
-        />
+          <SettingItem 
+            icon={icons.clock2}
+            title="Time limit (clock mode)" 
+            onValueChange={value => time = value} 
+            items={timeOptions} 
+            placeholder={{ label: "20 sec", value: 20 }} 
+          />
 
-        <SettingItem 
-          title="Type of anime to guess" 
-          onValueChange={value => type = value} 
-          items={typeOptions} 
-          placeholder={{ label: "Any", value: "" }} 
-        />
-
-        {/* <SettingItem 
-          title="Guess by" 
-          onValueChange={value => guess = value} 
-          items={guessOptions} 
-          placeholder={{ label: "Score", value: "score" }} 
-        /> */}
+          <SettingItem 
+            icon={icons.game2} 
+            title="Type of anime to guess" 
+            onValueChange={value => type = value} 
+            items={typeOptions} 
+            placeholder={{ label: "Any", value: "" }} 
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -57,17 +47,15 @@ const styles = StyleSheet.create({
    },
    container: {
     flex: 1,
-    width: "100%",
-    // justifyContent: "center",
-    // alignItems: "center",
+    width: "100%"
   },
   title: {
     backgroundColor: "#3A3A3A",
     color: "#FFFFFF",
     paddingVertical: 12,
     fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: "Varela"
   },
   settingsCont: {
     flex: 1,

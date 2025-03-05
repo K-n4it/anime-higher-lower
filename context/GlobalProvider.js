@@ -6,9 +6,6 @@ export const useGlobalContext = () => useContext(globalContext);
 
 const GlobalProvider = ({ children }) => {
 
-  // const [ time, setTime ] = useState(5000);
-  // const [ type, setType ] = useState("");
-  // const [ guess, setGuess ] = useState("");
   const [ score, setScore ] = useState(0);
 
   let time = 5000;
@@ -17,11 +14,8 @@ const GlobalProvider = ({ children }) => {
 
   const settingsInfo = {
     time, 
-    // setTime, 
     type, 
-    // setType, 
     guess, 
-    // setGuess, 
     score, 
     setScore
   };

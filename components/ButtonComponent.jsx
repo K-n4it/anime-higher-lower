@@ -1,7 +1,5 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 
-// import icons from "../constants/icons";
-
 export default function ButtonComponent({ title, icon, onPress, size, color }) {
 
   return (
@@ -27,10 +25,8 @@ export default function ButtonComponent({ title, icon, onPress, size, color }) {
 
 const styles = StyleSheet.create({
   button: {
-    // backgroundColor: "#ffcc5a",
     borderWidth: 2,
-    // borderColor: "#FFFFFF",
-    // borderRadius: "30%",
+    borderRadius: 10,
     margin: 4,
     flexGrow: 0,
     flexDirection: "row",
@@ -45,7 +41,7 @@ const styles = StyleSheet.create({
   text: {
     color: "#FFFFFF",
     textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 16
+    fontSize: 16, 
+    fontFamily: "VarelaRound"
   }
 });

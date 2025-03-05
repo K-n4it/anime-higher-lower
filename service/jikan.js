@@ -1,5 +1,5 @@
 // All the functions that interact with the jika api can be found in this file
-
+import { router } from "expo-router";
 import { Alert } from "react-native";
 
 import { type } from "../app/(tabs)/settings";
@@ -29,11 +29,6 @@ export const getRandomNum = () => {
 
 export const getAnimeItem = async () => {
 
-  // general 663
-  // airing 6
-  // movie 110
-  // ova 81
-
   const randomPage = getRandomNum();
 
   try {
@@ -46,29 +41,24 @@ export const getAnimeItem = async () => {
     const randomAnime = Math.floor(Math.random() * animeArray.length);
     const animeItem = animeArray[randomAnime];
 
-    // console.log(animeItem.images.jpg.large_image_url);
-
     return animeItem;
 
   } catch (error) {
     Alert.alert("Error", error.message);
+    router.back();
   }
 };
 
 export const validateItem = async func => {
   var animeItem;
-  // var test = 0;
   
   do {
     animeItem = await func();
-    // test++;
   } while (
       animeItem.score === null || 
       animeItem.popularity === null || 
       animeItem.favorites === null
     );
-
-  // console.log("numero de errores encontrados: " , test);
 
   return animeItem;
 };

@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from "react-native";
 
 export default function GameLayout() {
   return(
@@ -16,9 +16,7 @@ export default function GameLayout() {
         />
       </Stack>
 
-      <StatusBar 
-        style="dark"
-      />
+      <StatusBar barStyle="light-content" />
     </>
   );
 };

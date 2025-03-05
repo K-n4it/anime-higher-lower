@@ -1,33 +1,33 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { router } from "expo-router";
-import LinearGradient from "react-native-linear-gradient";
 
-import ButtonComponent from "../../components/ButtonComponent";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { getAnimeItem } from "../../service/jikan";
+import ButtonComponent from "../../components/ButtonComponent";
 
 import icons from "../../constants/icons";
+import title from "../../assets/images/title.png";
 
 export let isTimeOut;
 
 export default function Main() {
+
+  const { setScore } = useGlobalContext();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container} className="w-full justify-center items-center min-h-[85vh] px-4">
-        <Text style={styles.title}>
-          The 
-          <Text style={styles.titleOrange}> anime </Text> 
-          <Text style={styles.titleBlue}>Higher </Text> 
-          and 
-          <Text style={styles.titleRed}> Lower</Text> 
-          <Text style={styles.titleOrange}> GAME</Text>
-        </Text>
+        <Image 
+          source={title} 
+          style={styles.image} 
+          resizeMode="contain"
+        />
 
         <View style={styles.intContainer}>
-          <Text style={styles.message} className="text-bold">
-            Can you guess the most popular anime on myanimelist?
+          <Text style={styles.message}>
+            Can you guess the most popular anime on 
+            <Text style={styles.highlight}> MyAnimeList? </Text>
             Get ready player!
            </Text>
 
@@ -38,6 +38,7 @@ export default function Main() {
                 onPress={() => {
                   router.push("game");
                   isTimeOut = false;
+                  setScore(0);
                 }} 
                 size={60} 
                 color="#00C6CF"
@@ -49,6 +50,7 @@ export default function Main() {
                 onPress={() => {
                   router.push("game");
                   isTimeOut = true;
+                  setScore(0);
                 }} 
                 size={60} 
                 color="#00C6CF"
@@ -74,24 +76,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
     paddingHorizontal: 12,
   },
+  image: {
+    width: "100%",
+    height: "20%",
+  },
   intContainer: {
     padding: 20,
-    alignItems: "center",
-    // transform: [{rotateX: "10deg"}]
+    alignItems: "center"
   },
-  title: {
-    color: "#FFFFFF",
-    fontSize: 40,
-    fontWeight: "900",
-    textAlign: "center"
-  },
-  titleOrange: { color: "#F6B161" },
-  titleBlue: { color: "#00C6CF" },
-  titleRed: { color: "#FF2D2D" },
   message: {
     backgroundColor: "#3A3A3A",
     color: "#FFFFFF",
@@ -102,6 +98,8 @@ const styles = StyleSheet.create({
     borderColor: "#F2ECFF",
     borderRadius: 5,
     fontSize: 20,
-    textAlign: "center"
-  }
+    textAlign: "center",
+    fontFamily: "VarelaRound"
+  },
+  highlight: { color: "#00C6CF" }
 });

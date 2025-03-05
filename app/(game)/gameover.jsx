@@ -10,7 +10,7 @@ import icons from "../../constants/icons";
 
 export default function GameOver() {
 
-  const { score } = useGlobalContext();
+  const { score, setScore } = useGlobalContext();
   const [animeImage, setAnimeImage] = useState("");
 
   useEffect(() => {
@@ -42,7 +42,10 @@ export default function GameOver() {
           <View style={styles.buttonsContainer}>
             <ButtonComponent 
               title="Play again" 
-              onPress={() => router.replace("game")} 
+              onPress={() => {
+                router.replace("game");
+                setScore(0);
+              }} 
               icon={icons.game} 
               size={60} 
               color="#FFFFFF"
@@ -50,8 +53,11 @@ export default function GameOver() {
 
             <ButtonComponent 
               title="Back to main screen" 
-              onPress={() => router.replace("main")} 
-              // icon={} 
+              onPress={() => {
+                router.replace("main");
+                setScore(0);
+              }} 
+              icon={icons.back} 
               size={60} 
               color="#FFFFFF"
             />
@@ -85,26 +91,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   infoContainer: {
-    marginBottom: 10
+    marginBottom: 10,
   },
   scoreText: {
     color: "#FFFFFF",
     padding: 20,
     fontSize: 20,
     textAlign: "center",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: "VarelaRound"
   },
   scoreNumber: {
     color: "#1999FF",
     paddingBottom: 20,
     fontSize: 30,
     textAlign: "center",
+    fontFamily: "VarelaRound"
   },
   messageText: {
     color: "#FFFFFF",
     paddingBottom: 20,
     fontSize: 20,
-    textAlign: "center"
-  },
-  buttonsContainer: {}
+    textAlign: "center",
+    fontFamily: "VarelaRound"
+  }
 });

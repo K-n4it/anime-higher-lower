@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, View, StyleSheet, ActivityIndicator, StatusBar } from "react-native";
+import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import { router } from "expo-router";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
@@ -13,13 +13,12 @@ export default function Game() {
 
     const [animeItems, setAnimeItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isCountdownOn, setIsCountdownOn] = useState(false);
     const [timer, setTimer] = useState(time);
 
     const { score, setScore } = useGlobalContext();
 
     const addAnimeItem = async () => {
-
-      setIsLoading(true);
 
       animeItems.shift();
 
@@ -27,22 +26,14 @@ export default function Game() {
       const newAnimeItems = [...animeItems, newAnimeItem];
 
       setAnimeItems(newAnimeItems);
-      setIsLoading(false);
-
-      // console.log("anime 1: " + newAnimeItem.title);
-
-      // condificiones para que la pantalla se recargue:
-      // 1. que el id del anime sea exactamente igual en ambos objetos, lo que indicaría que ambos son el mismo anime
-      // 2. que la propiedad score o favorites sea igual a null
     };
 
     const compareNums = async playerAnswer => {
-      // switch case here
+
       const isHigher = animeItems[1].score > animeItems[0].score;
 
-      if (playerAnswer !== isHigher) {
-        router.replace("gameover");
-      }
+      if (playerAnswer !== isHigher) router.replace("gameover");
+      else increaseScore();
 
       addAnimeItem();
     };
@@ -52,12 +43,16 @@ export default function Game() {
       setScore(newScore);
     };
 
-    const handleTab = async (playerAnswer, setShowAnswer) => {
+    const handleTab = (playerAnswer, setShowAnswer) => {
+      setIsCountdownOn(false);
       try {
-        setShowAnswer();
-        setTimeout(() => compareNums(playerAnswer), 2000);
-        increaseScore();
-        // console.log("tipo: ", type, "adivinar: ", guess);
+        setShowAnswer(true);
+        setTimeout(() => {
+          compareNums(playerAnswer);
+          setTimer(time);
+          setIsCountdownOn(true);
+        }, 2000);
+        
       } catch (error) {
         console.log(error);
       }
@@ -76,22 +71,26 @@ export default function Game() {
         }
 
         setAnimeItems(newAnimeItems);
-        setIsLoading(false);
       };
 
       addItemsStart();
-      // console.log("tipo: ", type, "adivinar: ", guess);
+      setIsLoading(false);
+      setIsCountdownOn(true);
     }, []);
 
     useEffect(() => {
 
       let interval = null;
         
-      if (!isLoading && timer !== 0) interval = setInterval(() => setTimer(timer - 1), 1000);
+      if (isCountdownOn) {
+        interval = setInterval(() => setTimer(timer - 1), 1000);
+        return () => clearInterval(interval);
+      }
+      else interval = null;
 
-      return () => clearInterval(interval);
+      if (timer === 0) router.replace("gameover");
 
-    }, [timer, isLoading]);
+    }, [timer, isCountdownOn]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -99,7 +98,6 @@ export default function Game() {
 
         <View style={styles.info}>
           <Text style={styles.infoText}>Score: {score} </Text>
-          {/* <Text style={styles.infoText}>High Score: </Text> */}
         </View>
 
         <View style={styles.itemsContainer}>
@@ -110,7 +108,6 @@ export default function Game() {
               title={item.title} 
               vsTitle={index > 0 && array[index - 1].title} 
               answer={item.score} 
-              // answer={item[guess]} 
               background={item.images.jpg.large_image_url} 
               showAnswerState={index === 0 ? true : false} 
               handleTab={handleTab}
@@ -118,18 +115,6 @@ export default function Game() {
           )
         }
 
-        {/* <GameItem 
-            showAnswer={true} 
-            title={"random name"} 
-            vsTitle={"a"} 
-            answer={20}
-          />
-
-          <GameItem 
-            showAnswer={false} 
-            title={"random name"} 
-            vsTitle={"d"}
-          /> */}
         </View>
 
         <View style={styles.indicator}>
@@ -159,15 +144,12 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center"
   },
   info: {
     width: "100%",
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    // alignItems: "flex-start",
     position: "relative",
     zIndex: 1
   },
@@ -185,12 +167,10 @@ const styles = StyleSheet.create({
   },
   indicator: {
     backgroundColor: "#FFFFFF",
-    // padding: 20,
     width: 80,
     height: 80,
     borderRadius: 50,
     top: "37%",
-    // position: "relative",
     alignItems: "center",
     justifyContent: "center",
     zIndex: 1
@@ -202,4 +182,4 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold"
   }
-})
+});
