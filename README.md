@@ -1,50 +1,37 @@
-# Welcome to your Expo app 👋
+# The Anime Higher Or Lower Game 🎲
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile app where you can play to guess which is the anime with the highest score on MyAnimeList. This is an [Expo](https://expo.dev) project.
 
-## Get started
+## Description
 
-1. Install dependencies
+1. **Main Screen** (tab)
 
-   ```bash
-   npm install
-   ```
+The main screen of the app. Here you can choose between two game modes:
 
-2. Start the app
+- **Normal mode**
 
-   ```bash
-    npx expo start
-   ```
+You can play to guess with no time limit.
 
-In the output, you'll find options to open the app in a
+- **Beat the clock mode**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+You can play to guess with an specific time limit (20 seconds by default).
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+2. **Settings Screen** (tab)
 
-## Get a fresh project
+The settings screen is used to change parameters of the game.
 
-When you're ready, run:
+- **Time limit option**: modifies the time limit in the **beat the clock mode**
 
-```bash
-npm run reset-project
-```
+- **Type of anime to guess option**: modifies the group of animes displayed.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+(you can navigate between these tabs using the tab bar).
 
-## Learn more
+3. **Game Screen**
 
-To learn more about developing your project with Expo, look at the following resources:
+On this screen you can play to guess which of the two animes displayed has a higher score in MyAnimeList. If your answer is right, your score will increase by one point.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+4. **Game Over Screen**
 
-## Join the community
+If you answer incorrectly or time runs out on the **beat the clock mode** you will be redirected to this screen. Here you can see your game score. Also, you can choose to play again or go back to the **main screen**
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## HAVE FUN!
