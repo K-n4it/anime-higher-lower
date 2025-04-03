@@ -7,23 +7,23 @@ import "react-native-reanimated";
 import GlobalProvider from "../context/GlobalProvider";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
-export default function TabsLayout() {
+// export default function TabsLayout() {
 
-  const [fontsLoaded, error] = useFonts({
-    VarelaRound: require("../assets/fonts/VarelaRound-Regular.ttf"),
-    Varela: require("../assets/fonts/Varela-Regular.ttf")
-  });
+//   const [fontsLoaded, error] = useFonts({
+//     VarelaRound: require("../assets/fonts/VarelaRound-Regular.ttf"),
+//     Varela: require("../assets/fonts/Varela-Regular.ttf")
+//   });
 
-  useEffect(() => {
-    if (error) throw error;
+//   useEffect(() => {
+//     if (error) throw error;
 
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, 
-  [fontsLoaded, error]);
+//     if (fontsLoaded) SplashScreen.hideAsync();
+//   }, 
+//   [fontsLoaded, error]);
 
-  if (!fontsLoaded && !error) return null;
+//   if (!fontsLoaded && !error) return null;
 
   return (
     <GlobalProvider>
